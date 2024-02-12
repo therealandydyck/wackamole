@@ -4,32 +4,34 @@
  * \date 2024-02-08
  * \brief grid for mole buttons to be bopped
  */
-import { useEffect, useState } from "react";
+import { useEffect, useState, React } from "react";
 import { Text, View } from "react-native";
 import { MoleButton } from "./buttons";
 import Styles from "../styles/page-styles";
+import { useNavigation } from "expo-router";
 
-// {/* <Text>Score:{score} Misses:{miss}</Text> */}
 
 export const GameGrid = () => {
     const [gridSize, setGridSize] = useState(9);
     const [moles, setMoles] = useState(Array(gridSize).fill(false));
     const [score, setScore] = useState(0);
-    const [miss, setMiss] = useState(10);
     const [moleTime, setMoleTimer] = useState(2500);
-    
-    const playGrid = [
-        moles.map((isUp, index) => (
-            <MoleButton key={index} onPress={() => moleBop(index)} isUp={isUp} />
-        ))
-        ];
+    // const [moleTime2, setMole2Timer] = useState(1777);
+    const [moleLife, setLifeTimer] = useState(2000);
 
+    const navigation = useNavigation();
+
+    
+
+    // sets the mole state
     const moleState = (state, index) => {
         const mole = [...moles];
         mole[index] = state;
         setMoles(mole);
     }
 
+
+    // this never worked properly, requires deep understanding of how setInterval and setTimeout capture values and what workarounds are required to pass 'live' variables
     // const checkMiss = (index) => {
     //     const mole = [...moles];
     //     console.log(mole[index]);
@@ -39,6 +41,7 @@ export const GameGrid = () => {
     //     }
     // }
 
+    // function to whack mole on press
     const moleBop = (index) => {
         const mole = [...moles];
         
@@ -47,50 +50,82 @@ export const GameGrid = () => {
             console.log('Score!');
             mole[index] = false;
             setMoles(mole);
+            setDifficulty();
         }
+        
         //console.log(mole[index]);
     }
 
-    const moleUp = (index) => {
-        const mole = [...moles];
-        moleState(true, index);
-        
-        const interval2 = setTimeout(() => {
-            // checkMiss(index);
-            // const delay = setTimeout(() => {
-                
-            // },100);
-            moleState(false, index);
-        }, moleTime - 1000);
-        
+     const setDifficulty = () => {
+        if (score === 5) {
+            setMoleTimer(2000);
+        }
+        if (score === 10) {
+            setMoleTimer(1500);
+        }
+        if (score === 15) {
+            setMoleTimer(1300);
+            setLifeTimer(1500);
+        }
+        if (score === 20) {
+            setMoleTimer(1100);
+            setLifeTimer(1300);
+        }
+        if (score === 25) {
+            setMoleTimer(900);
+            setLifeTimer(1000);
+        }
     }
 
+    // function to select mole to activate - starts pop down timer as well
+    const moleUp = (index) => {
+        const mole = [...moles];
+            moleState(true, index);
+            const interval = setTimeout(() => {
+                    moleState(false, index);
+            }, moleLife);
+       
+    }
+
+    // const moleUp2 = (index) => {    // this used to work
+    //     const mole = [...moles];
+    //     if (mole[index] === false) {
+    //         moleState(true, index);
+    //         const interval = setTimeout(() => {
+    //             moleState(false, index);
+    //         }, moleLife);
+    //     }
+    // }
+
+    // Game timer
     useEffect (() => {
-        const level2 = setTimeout(() => {
-            setMoleTimer(2000);
-            setGridSize(12);
-        }, 20000);
-        const level3 = setTimeout(() => {
-            setMoleTimer(1500);
-            setGridSize(16);
-        }, 40000);
+        
         const gameOver = setTimeout(() => {
-            
-        }, 80000)
+           navigation.replace('gameOver', {param1: score});
+          
+        }, 10000)
     },[])
 
+    // spawns mole
     useEffect (() => {
         const interval = setInterval(() => {
             const rngIndex = Math.floor(Math.random() * moles.length);
             moleUp(rngIndex);
             
         }, moleTime);
+        
+        // const startMole2 = setInterval(() => { //this used to work
+        //     if (score >= 3) {
+        //         const rngIndex2 = Math.floor(Math.random() * moles.length);
+        //         moleUp2(rngIndex2);
+        //     }
+        // }, moleTime2);
+        
         return () => {
+            // clearInterval(startMole2);
             clearInterval(interval);
         };
     },[moles]);
-
-
    
 
     return (
@@ -99,9 +134,7 @@ export const GameGrid = () => {
                 {moles.map((isUp, index) => (
                     <MoleButton key={index} onPress={() => moleBop(index)} isUp={isUp} />
                 ))}
-               
             </View>
-
             <Text style={Styles.score}>Score:{score}</Text>
         </View>
     )

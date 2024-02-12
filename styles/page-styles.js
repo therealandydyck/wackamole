@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 15,
     },
-    
+
     grid: {
         flexDirection: 'row', 
         flexWrap:'wrap', 
@@ -48,6 +48,31 @@ const styles = StyleSheet.create({
         fontSize: 24,
         margin: 30,
     },
+
+    instructionsBox: {
+        flex: 0.35,
+        marginTop: 30,
+    },
+
+    text: {
+        fontSize: 18,
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+        flexWrap: 'wrap',
+        paddingLeft: 30,
+        paddingRight: 20,
+        
+    },
+
+    instructionText: {
+        fontSize: 24,
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+        flexWrap: 'wrap',
+        paddingLeft: 20,
+        paddingRight: 20,
+        marginBottom: 15,
+    }
 
 });
 

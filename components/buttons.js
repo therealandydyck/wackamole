@@ -5,7 +5,7 @@
  * \brief   Component file that contains all button related functions
  */
 //import { useEffect, useState } from "react";
-import { Button, Pressable, Text, View } from "react-native";
+import { Pressable, View } from "react-native";
 import Styles from "../styles/page-styles";
 
 
