@@ -103,7 +103,7 @@ export const GameGrid = () => {
         const gameOver = setTimeout(() => {
            navigation.replace('gameOver', {param1: score});
           
-        }, 10000)
+        }, 100000)
     },[])
 
     // spawns mole
