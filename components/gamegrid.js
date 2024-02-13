@@ -15,9 +15,10 @@ export const GameGrid = () => {
     const [gridSize, setGridSize] = useState(9);
     const [moles, setMoles] = useState(Array(gridSize).fill(false));
     const [score, setScore] = useState(0);
-    const [moleTime, setMoleTimer] = useState(2500);
+    const [moleTime, setMoleTimer] = useState(1800);
     // const [moleTime2, setMole2Timer] = useState(1777);
-    const [moleLife, setLifeTimer] = useState(2000);
+    const [moleLife, setLifeTimer] = useState(1700);
+    const [level, setLevel] = useState(1);
 
     const navigation = useNavigation();
 
@@ -58,22 +59,29 @@ export const GameGrid = () => {
 
      const setDifficulty = () => {
         if (score === 5) {
-            setMoleTimer(2000);
+            setMoleTimer(1500);
+            setLifeTimer(1300);
+            setLevel(2);
         }
         if (score === 10) {
-            setMoleTimer(1500);
+            setMoleTimer(1200);
+            setLifeTimer(1100);
+            setLevel(3);
         }
         if (score === 15) {
-            setMoleTimer(1300);
-            setLifeTimer(1500);
+            setMoleTimer(1100);
+            setLifeTimer(1000);
+            setLevel(4);
         }
         if (score === 20) {
-            setMoleTimer(1100);
-            setLifeTimer(1300);
+            setMoleTimer(900);
+            setLifeTimer(850);
+            setLevel(5);
         }
         if (score === 25) {
-            setMoleTimer(900);
-            setLifeTimer(1000);
+            setMoleTimer(750);
+            setLifeTimer(700);
+            setLevel(6);
         }
     }
 
@@ -135,7 +143,7 @@ export const GameGrid = () => {
                     <MoleButton key={index} onPress={() => moleBop(index)} isUp={isUp} />
                 ))}
             </View>
-            <Text style={Styles.score}>Score:{score}</Text>
+            <Text style={Styles.score}>Score:{score}  Level:{level}</Text>
         </View>
     )
 }
