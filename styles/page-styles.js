@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     },
 
     instructionsBox: {
-        flex: 0.35,
+        flex: 0.45,
         marginTop: 30,
     },
 

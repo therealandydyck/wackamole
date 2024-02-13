@@ -17,7 +17,8 @@ export default function Page() {
                 <Text style={Styles.text}>1. Press Start Bopping to begin play.</Text>
                 <Text style={Styles.text}>2. The mole holes will turn brown when the mole pops up.</Text>
                 <Text style={Styles.text}>3. Tap the mole before it disappears to score a point.</Text>
-                <Text style={Styles.text}>4. Score as many points as you can before time runs out.</Text>
+                <Text style={Styles.text}>4. Score as many points as you can before time runs out, you have 100 seconds.</Text>
+                <Text style={Styles.text}>5. As you get more moles, the level will increase.</Text>
             </View>
 
             <Pressable style={Styles.button}>
