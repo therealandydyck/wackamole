@@ -7,14 +7,15 @@
 import { Pressable, Text, View } from "react-native";
 import { Link } from "expo-router";
 import Styles from "../styles/page-styles";
-import { useNavigation } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 
-export default function Page({route}) {
-    const { score } = route.param1;
+export default function Page() {
+    const params = useLocalSearchParams();
+    const { param1 } = params;
     return (
         <View style={Styles.page}>
             <Text style={Styles.instructionText}>Game Over</Text>
-            <Text style={Styles.instructionText}>Final Score = {score}</Text>
+            <Text style={Styles.instructionText}>Final Score = {param1}</Text>
             <Pressable style={Styles.button} >
                 <Link href="/">Back to start page</Link>
             </Pressable>
