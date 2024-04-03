@@ -2,9 +2,9 @@
   "expo": {
     "name": "wackamole",
     "slug": "wackamole",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/WACCAMOLE.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -21,7 +21,9 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "ca.andydyck.waccamole",
+      "versionCode": 1001
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -29,6 +31,14 @@
     "plugins": [
       "expo-router"
     ],
-    "scheme": "wackamole"
+    "scheme": "wackamole",
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "054ddf45-09b3-4b2b-ae8d-b321d8343009"
+      }
+    }
   }
 }
